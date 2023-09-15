@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,36 +8,94 @@
     <link href="https://fonts.googleapis.com/css2?family=Satoshi&display=swap" rel="stylesheet">
     {% load static %}
     <link rel="stylesheet" href="{% static 'GLIMMA_AI/css/styles.css' %}">
+    <script src="{% static 'GLIMMA_AI/js/script.js' %}"></script>
 </head>
+
 <body>
-
-
     <div class="container">
 
         <!-- Initial Content -->
         <div id="initial-content">
-            <h1>Build a better brand</h1>
-            <h2>Attract better opportunities</h2>
-            <p>Glimma.ai learns your authentic brand...</p>
+            <h1>Welcome to the Quiz</h1>
             <button id="get-started">Get Started</button>
         </div>
 
-        <!-- New Content -->
-        <div id="new-content" style="display: none;">
-            <h1>Do you want to build your personal brand, or is this for a business?</h1>
-            <div>
-                <button id="personal">Personal</button>
-                <button id="business">Business</button>
+        <!-- Question 1 -->
+        <div id="question-1-content" style="display: none;">
+            <h2>Question 1: ...?</h2>
+            <div class="options">
+                <button>Option A</button>
+                <button>Option B</button>
+                <!-- Add more options as needed -->
             </div>
         </div>
 
+        <!-- Question 2 -->
+        <div id="question-2-content" style="display: none;">
+            <h2>Question 2: ...?</h2>
+            <div class="options">
+                <button>Option A</button>
+                <button>Option B</button>
+                <!-- Add more options as needed -->
+            </div>
+        </div>
+
+        <div id="question-3-content" style="display: none;">
+            <h2>Question 3: ...?</h2>
+            <div class="options">
+                <button>Option A</button>
+                <button>Option B</button>
+                <!-- Add more options as needed -->
+            </div>
+        </div>
+
+        <div id="question-4-content" style="display: none;">
+            <h2>Question 4: ...?</h2>
+            <div class="options">
+                <button>Option A</button>
+                <button>Option B</button>
+                <!-- Add more options as needed -->
+            </div>
+        </div>
+
+        <div id="question-5-content" style="display: none;">
+            <h2>Question 5: ...?</h2>
+            <div class="options">
+                <button>Option A</button>
+                <button>Option B</button>
+                <!-- Add more options as needed -->
+            </div>
+        </div>
+        <!-- ... Repeat for all questions up to Question 6 -->
+
+        <!-- Question 6 -->
+        <div id="question-6-content" style="display: none;">
+            <h2>Question 6: ...?</h2>
+            <div class="options">
+                <button>Option A</button>
+                <button>Option B</button>
+                <!-- Add more options as needed -->
+            </div>
+        </div>
+
+        <!-- GPT Interaction Content -->
+        <div id="gpt-content" style="display: none;">
+            <h2>GPT Integration</h2>
+            <label for="user_input">Your Input:</label>
+            <input type="text" id="user_input" placeholder="Enter your data...">
+            <button id="generate">Generate</button>
+            <div id="gpt-output">
+                <!-- The output from GPT will be displayed here -->
+            </div>
+            <textarea id="editable-output"></textarea>
+        </div>
     </div>
 
 </body>
-<script>
-    document.getElementById("get-started").addEventListener("click", function() {
-        document.getElementById("initial-content").style.display = "none";
-        document.getElementById("new-content").style.display = "block";
-    });
-</script>
+
+<script type="text/javascript">
+    var csrftoken = '{{ csrf_token }}';
+    </script>
+
+
 </html>

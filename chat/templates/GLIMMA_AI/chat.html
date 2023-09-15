@@ -1,0 +1,40 @@
+{% extends 'GLIMMA_AI/layout.html' %}
+{% load static %}
+
+{% block head %}
+<title>ChatGPT</title>
+{% endblock %}
+
+{% block body %}
+<section class="bg bg-gradient bg-light">
+    <div class="container py-5">
+        <div class="card">
+            <div class="card-body">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-7 col-xl-5 mb-4 mb-md-0">
+                        <div class="py-4 d-flex flex-row">
+                            <h1>ChatGPT</h1>
+                        </div>
+                        <!-- Chat area -->
+                        <div class="card text-white" id="chatCard"></div>
+                        <!-- Loading spinner area -->
+                        <div class="d-flex align-items-center mt-3 text-primary" id="loading"></div>
+                        <!-- User input area -->
+                        <div class="mt-3">
+                            <div class="form-field">
+                                <textarea id="userText" required class="form-control" type="textarea" name="address" placeholder="Text:"></textarea>
+                            </div>
+                        </div>
+                        <!-- Send button -->
+                        <div class="d-grid gap-2 mt-4">
+                            <button id="submitBtn" class="btn btn-primary fs-5">Send</button>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+

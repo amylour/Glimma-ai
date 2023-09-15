@@ -61,3 +61,20 @@ button:hover {
 .highlight {
     color: #9966ff; /* Adjust the color value as needed */
 }
+
+.options {
+    padding-top: 25px;
+}
+
+#back-arrow {
+    font-size: 1.5em;
+    color: white;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+#back-arrow:hover {
+    background: rgba(0, 0, 0, 0.7);
+}
