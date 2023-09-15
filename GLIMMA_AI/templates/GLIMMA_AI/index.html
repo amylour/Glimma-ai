@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glimma.ai</title>
+    <link href="https://fonts.googleapis.com/css2?family=Satoshi&display=swap" rel="stylesheet">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'GLIMMA_AI/css/styles.css' %}">
+</head>
+<body>
+
+
+    <div class="container">
+
+        <!-- Initial Content -->
+        <div id="initial-content">
+            <h1>Build a better brand</h1>
+            <h2>Attract better opportunities</h2>
+            <p>Glimma.ai learns your authentic brand...</p>
+            <button id="get-started">Get Started</button>
+        </div>
+
+        <!-- New Content -->
+        <div id="new-content" style="display: none;">
+            <h1>Do you want to build your personal brand, or is this for a business?</h1>
+            <div>
+                <button id="personal">Personal</button>
+                <button id="business">Business</button>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+<script>
+    document.getElementById("get-started").addEventListener("click", function() {
+        document.getElementById("initial-content").style.display = "none";
+        document.getElementById("new-content").style.display = "block";
+    });
+</script>
+</html>
