@@ -11,6 +11,20 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
 from pathlib import Path
+from decouple import Config, Csv
+
+# Load the .env file
+os.environ.setdefault("DJANGO_READ_DOT_ENV_FILE", "True")
+
+if os.getenv("DJANGO_READ_DOT_ENV_FILE") == "True":
+    with open(os.path.join(BASE_DIR, ".env")) as f:
+        for line in f:
+            key, value = line.strip().split('=', 1)
+            os.environ[key] = value.strip()
+
+config = Config()
+
+config = Config()
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -27,6 +41,8 @@ SECRET_KEY = 'django-insecure-(3_fkju!(gawcgi#!@l668awk@^o6o^i8xzf-*kz=0l!!p*cxj
 DEBUG = True
 
 ALLOWED_HOSTS = ['8000-romcgill-glimmaai-bxu498rzy8l.ws-us104.gitpod.io']
+
+OPENAI_API_KEY = config('OPENAI_API_KEY', default='')
 
 
 # Application definition
