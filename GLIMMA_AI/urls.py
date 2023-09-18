@@ -1,7 +1,8 @@
-from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
+from . import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('GLIMMA_AI.urls')),
+
+    path('quiz/', views.display_quiz, name='display_quiz'),
+    path('save_answer/', views.save_answer, name='save_answer'),
 ]

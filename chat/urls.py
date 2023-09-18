@@ -5,4 +5,5 @@ from .views import *
 urlpatterns = [
     path('chat', chat, name='chat'),
     path('ajax/', Ajax, name='ajax'),
+
 ]

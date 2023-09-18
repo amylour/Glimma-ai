@@ -1,0 +1,73 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    align-items: center; /* Vertically center */
+    justify-content: center; /* Horizontally center */
+    flex-direction: column; /* Stack children vertically */
+    background-color: black;
+    color: white;
+    font-family: Arial, sans-serif;
+    position: relative;
+    overflow: hidden; /* Ensure that the circles do not cause scrolling */
+}
+
+
+.question-container {
+    text-align: center; /* Center the content within each question container */
+}
+
+
+
+
+.progress {
+    height: 30px;
+    background-color: #333;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: #9966ff;
+    transition: width 0.3s;
+}
+
+
+.question-container {
+    display: none;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #9966ff;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+
+
+.gradient-circle {
+    position: absolute;
+    top: 50%;
+    width: 100vw; /* Full width */
+    height: 100vw; /* Equal to width to ensure it remains a circle */
+    transform: translateY(-50%); /* Center vertically */
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(153, 102, 255, 0.2), transparent); /* Added 20% opacity */
+}
+
+.gradient-circle.left {
+    left: 50%;
+    transform: translateX(-100%) translateY(-50%);
+}
+
+.gradient-circle.right {
+    right: 50%;
+    transform: translateX(100%) translateY(-50%);
+}

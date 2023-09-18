@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz</title>
+    {% load static %}
+
+<link rel="stylesheet" href="{% static 'GLIMMA_AI/css/quiz.css' %}">
+<script src="{% static 'GLIMMA_AI/js/quiz.js' %}"></script>
+</head>
+<body>
+    <div class="gradient-circle left"></div>
+    <div class="gradient-circle right"></div>
+
+    <!-- Progress bar to display user's progress -->
+    <div class="progress">
+        <!-- Initialize progress bar with 0 width -->
+        <div class="progress-bar" style="width: 0%;"></div>
+    </div>
+
+    <!-- Questions rendered from context -->
+    {% for question, options in questions.items %}
+        <!-- Each question is contained in its own div and initially hidden -->
+        <div class="question-container" id="question-{{ forloop.counter0 }}" style="display: none;">
+            <h2>{{ question }}</h2>
+            {% for option in options %}
+                <!-- Each option button has an onclick event to submit the answer and load the next question -->
+                <button onclick="submitAnswer('{{ question }}', '{{ option }}')">{{ option }}</button>
+            {% endfor %}
+        </div>
+    {% endfor %}
+
+
+    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+</body>
+</html>

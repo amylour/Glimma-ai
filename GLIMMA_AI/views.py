@@ -1,35 +1,42 @@
-
-from django.shortcuts import render, HttpResponse
-
+from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from .models import UserResponse
-import openai
-from django.shortcuts import render, redirect
-from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
+import json
 
+@login_required
+def display_quiz(request):
+    # Sample questions and options
+    questions = {
+        'What is your favorite color?': ['Red', 'Green', 'Blue'],
+        'Which animal do you prefer?': ['Cat', 'Dog', 'Bird'],
+        'What is your 2nd favorite color?': ['Red', 'Green', 'Blue'],
+        'What is your favorite city?': ['berlin', 'dublin', 'bankok'],
+        # Add more questions as needed
+    }
 
-def index(request):
-    return render(request, 'GLIMMA_AI/index.html')
-
+    return render(request, 'GLIMMA_AI/quiz.html', {'questions': questions})
 
 @csrf_exempt
+@login_required
 def save_answer(request):
-    if request.method == "POST" and request.user.is_authenticated:
-        question = request.POST.get("question")
-        answer = request.POST.get("answer")
+    try:
+        if request.method == 'POST':
+            data = json.loads(request.body)
+            question = data.get('question')
+            answer = data.get('answer')
 
-        response = UserResponse(user=request.user, question=question, answer=answer)  # <-- Note the user assignment
-        response.save()
+            user_response = UserResponse(
+                user=request.user,
+                question=question,
+                answer=answer
+            )
+            user_response.save()
 
-        print(f"Question: {question}\nAnswer: {answer}")
-        return JsonResponse({"status": "success"}, status=200)
-    return JsonResponse({"status": "error"}, status=400)
+            return JsonResponse({'status': 'success'})
 
+        return JsonResponse({'status': 'error'})
 
-
-
-
-
-
-
+    except Exception as e:
+        return JsonResponse({'status': 'error', 'message': str(e)})

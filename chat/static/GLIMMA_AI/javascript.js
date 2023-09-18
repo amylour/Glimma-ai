@@ -25,12 +25,6 @@ function chat_ajax() {
             // Clear previous chat
             chatCard.innerHTML = '';
 
-            // Display user text
-            chatCard.innerHTML += `
-            <div class="card-body bg bg-primary">
-                <h5 class="card-title">${text}</h5>
-            </div>
-            `;
 
             // Display GPT response
             chatCard.innerHTML += `
