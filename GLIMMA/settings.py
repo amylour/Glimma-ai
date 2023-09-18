@@ -13,6 +13,10 @@ import os
 from pathlib import Path
 from decouple import Config, Csv
 
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 # Load the .env file
 os.environ.setdefault("DJANGO_READ_DOT_ENV_FILE", "True")
 
@@ -22,13 +26,9 @@ if os.getenv("DJANGO_READ_DOT_ENV_FILE") == "True":
             key, value = line.strip().split('=', 1)
             os.environ[key] = value.strip()
 
-config = Config()
-
-config = Config()
+config = Config(os.environ)
 
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production

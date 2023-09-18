@@ -1,7 +1,3 @@
-document.addEventListener('DOMContentLoaded', function() {
-    document.querySelector('#submitBtn').addEventListener('click', chat_ajax);
-});
-
 function chat_ajax() {
     let text = document.querySelector('#userText').value;
 
@@ -25,7 +21,6 @@ function chat_ajax() {
             // Clear previous chat
             chatCard.innerHTML = '';
 
-
             // Display GPT response
             chatCard.innerHTML += `
             <div class="card-body bg bg-light text-dark">
@@ -36,11 +31,15 @@ function chat_ajax() {
             // Hide loading spinner
             loading.innerHTML = '';
         },
-        error: function() {
-            console.log("There was an error!");
+        error: function(err) {
+            console.log("There was an error!", err);
         }
     });
 
     // Clear input
     document.querySelector('#userText').value = '';
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelector('#submitBtn').addEventListener('click', chat_ajax);
+});

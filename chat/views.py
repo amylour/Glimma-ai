@@ -4,6 +4,8 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import openai
 from django.conf import settings
+from GLIMMA_AI.models import UserResponse
+
 
 # This function will generate a personalized prompt for the user
 # by fetching their past responses to questions.
@@ -57,7 +59,7 @@ def Ajax(request):
 
         # Save the chat in the database.
         chat = Chat.objects.create(text=personalized_prompt, gpt=response)
-        return JsonResponse({'data': response, })
+        return JsonResponse({'data': response})
 
     return JsonResponse({})
 

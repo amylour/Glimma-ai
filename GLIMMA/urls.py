@@ -9,3 +9,4 @@ urlpatterns = [
     path('', include("chat.urls")),  # Including the chat app URLs
     path('', include('GLIMMA_AI.urls')),
 ]
+
