@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <title>Quiz</title>
     {% load static %}
-
-<link rel="stylesheet" href="{% static 'GLIMMA_AI/css/quiz.css' %}">
-<script src="{% static 'GLIMMA_AI/js/quiz.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'GLIMMA_AI/css/quiz.css' %}">
 </head>
 <body>
     <div class="gradient-circle left"></div>
@@ -14,7 +12,6 @@
 
     <!-- Progress bar to display user's progress -->
     <div class="progress">
-        <!-- Initialize progress bar with 0 width -->
         <div class="progress-bar" style="width: 0%;"></div>
     </div>
 
@@ -30,7 +27,9 @@
         </div>
     {% endfor %}
 
-
     <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+
+    <!-- Load the quiz.js at the end -->
+    <script src="{% static 'GLIMMA_AI/js/quiz.js' %}"></script>
 </body>
 </html>

@@ -1,39 +1,44 @@
 // Variable to track the current question index.
-let currentQuestionIndex = -1;
+let currentQuestionIndex = 0;
 
 // Obtain the total number of question containers.
 const totalQuestions = document.querySelectorAll('.question-container').length;
 
-// Function to update the progress bar based on the current question index.
 function updateProgressBar() {
     const progressPercentage = ((currentQuestionIndex + 1) / totalQuestions) * 100;
     document.querySelector('.progress-bar').style.width = `${progressPercentage}%`;
 }
 
-// Function to display the next question.
 function displayNextQuestion() {
     // Hide the current question.
     const currentQuestion = document.getElementById(`question-${currentQuestionIndex}`);
     if (currentQuestion) {
         currentQuestion.style.display = 'none';
+    } else {
+        console.error("Couldn't find the current question in the DOM");
     }
 
     // Increment the current question index.
     currentQuestionIndex++;
+
+    // If there are no more questions, redirect to chat page
+    if (currentQuestionIndex >= totalQuestions) {
+        window.location.href = '/chat';
+        return;
+    }
+
+    // Update the progress bar.
+    updateProgressBar();
 
     // Show the next question.
     const nextQuestion = document.getElementById(`question-${currentQuestionIndex}`);
     if (nextQuestion) {
         nextQuestion.style.display = 'block';
     } else {
-        console.warn("No more questions to display.");
+        console.error(`Couldn't find the next question with ID 'question-${currentQuestionIndex}' in the DOM`);
     }
-
-    // Update the progress bar.
-    updateProgressBar();
 }
 
-// Function to submit the answer and make an API call.
 function submitAnswer(question, answer) {
     console.log(`Submitting answer for question: ${question}, Answer: ${answer}`);
 
@@ -64,7 +69,22 @@ function submitAnswer(question, answer) {
     });
 }
 
+function initializeQuiz() {
+    // Hide all questions first.
+    document.querySelectorAll('.question-container').forEach(question => {
+        question.style.display = 'none';
+    });
+
+    // Display the first question.
+    const firstQuestion = document.getElementById(`question-${currentQuestionIndex}`);
+    if (firstQuestion) {
+        firstQuestion.style.display = 'block';
+    } else {
+        console.error(`Couldn't find the first question with ID 'question-0' in the DOM`);
+    }
+}
+
 // Initialize the quiz by displaying the first question.
 document.addEventListener("DOMContentLoaded", function() {
-    displayNextQuestion();
+    initializeQuiz();
 });
