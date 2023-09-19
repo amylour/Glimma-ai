@@ -12,7 +12,7 @@ def display_quiz(request):
         'What is your favorite color?': ['Red', 'Green', 'Blue'],
         'Which animal do you prefer?': ['Cat', 'Dog', 'Bird'],
         'What is your 2nd favorite color?': ['Red', 'Green', 'Blue'],
-        'What is your favorite city?': ['berlin', 'dublin', 'bankok'],
+        'What is your favorite city?': "input_field",
         # Add more questions as needed
     }
 

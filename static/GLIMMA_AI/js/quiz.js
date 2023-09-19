@@ -69,6 +69,15 @@ function submitAnswer(question, answer) {
     });
 }
 
+function submitTextInput(question, inputId) {
+    const userInput = document.getElementById(inputId).value;
+    if (!userInput) {
+        alert("Please enter your answer.");
+        return;
+    }
+    submitAnswer(question, userInput);
+}
+
 function initializeQuiz() {
     // Hide all questions first.
     document.querySelectorAll('.question-container').forEach(question => {

@@ -20,10 +20,16 @@
         <!-- Each question is contained in its own div and initially hidden -->
         <div class="question-container" id="question-{{ forloop.counter0 }}" style="display: none;">
             <h2>{{ question }}</h2>
-            {% for option in options %}
-                <!-- Each option button has an onclick event to submit the answer and load the next question -->
-                <button onclick="submitAnswer('{{ question }}', '{{ option }}')">{{ option }}</button>
-            {% endfor %}
+            {% if options == "input_field" %}
+                <!-- For text input field -->
+                <input type="text" placeholder="Enter your answer here" id="input-{{ forloop.counter0 }}">
+                <button onclick="submitTextInput('{{ question }}', 'input-{{ forloop.counter0 }}')">Submit</button>
+            {% else %}
+                {% for option in options %}
+                    <!-- Each option button has an onclick event to submit the answer and load the next question -->
+                    <button onclick="submitAnswer('{{ question }}', '{{ option }}')">{{ option }}</button>
+                {% endfor %}
+            {% endif %}
         </div>
     {% endfor %}
 
