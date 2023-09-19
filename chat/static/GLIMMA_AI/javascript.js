@@ -15,16 +15,25 @@ function chat_ajax() {
             'text': text
         },
         success: function(res) {
-            let response = res.data;
+            let response = res.data; // GPT response (hook)
+            let postResponse = res.post_data; // Social media post
+
             let chatCard = document.querySelector('#chatCard');
 
             // Clear previous chat
             chatCard.innerHTML = '';
 
-            // Display GPT response
+            // Display GPT response (hook)
             chatCard.innerHTML += `
             <div class="card-body bg bg-light text-dark">
-                <h5 class="card-title">${response}</h5>
+                <h5 class="card-title">Hook: ${response}</h5>
+            </div>
+            `;
+
+            // Display Social media post
+            chatCard.innerHTML += `
+            <div class="card-body bg bg-light text-dark">
+                <h5 class="card-title">Post: ${postResponse}</h5>
             </div>
             `;
 

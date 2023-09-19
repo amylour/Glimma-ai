@@ -6,45 +6,47 @@ import openai
 from django.conf import settings
 from GLIMMA_AI.models import UserResponse
 
-
-# This function will generate a personalized prompt for the user
-# by fetching their past responses to questions.
 def generate_prompt(user):
     user_responses = UserResponse.objects.filter(user=user)
     prompt_text = ""
-
-    # Iterate through each response and format it into the prompt.
     for response in user_responses:
         prompt_text += f"The user was asked '{response.question}', they replied with '{response.answer}'. "
-
-    prompt_text += "Make them a hook based on this information provided."
+    prompt_text += "Make them a hook based on this information provided. 7 words max"
     return prompt_text
 
-# This view displays the chat interface.
+def generate_prompt2(user):
+    user_responses = UserResponse.objects.filter(user=user)
+    prompt_text2 = ""
+    for response in user_responses:
+        prompt_text2 += f"The user was asked '{response.question}', they replied with '{response.answer}'. "
+    prompt_text2 += "Make them a post based on this information provided."
+    return prompt_text2
+
 def chat(request):
     chats = Chat.objects.all()
     return render(request, 'GLIMMA_AI/chat.html', {'chats': chats, })
 
-# The main view that communicates with the GPT-3 API.
 @csrf_exempt
 def Ajax(request):
-    # Handle both regular GET requests and AJAX requests.
     if request.method == "GET" or request.headers.get('X-Requested-With') == 'XMLHttpRequest':
         personalized_prompt = generate_prompt(request.user)
-        print(personalized_prompt)
-
-        # Setting the OpenAI API key.
+        personalized_prompt2 = generate_prompt2(request.user)
         openai.api_key = settings.OPENAI_API_KEY
 
-        # Pre-defined context setup for GPT-3.
         context = {
             "role": "system",
-            "content": (
-                "You are an expert copywriter tasked with crafting exceptional social media content tailored "
-                "for brands that align with Carl Jung's 12 primary archetypes [...]")
+            "content": ("You are an expert copywriter tasked with crafting exceptional social media content tailored for brands that align with Carl Jung's 12 primary archetypes (ranging from the Hero, known for bravery and action, to the Sage, known for wisdom and introspection, and so on)."
+"Analyze the user's provided archetype and other data points."
+"Create content that subtly resonates with these details but NEVER explicitly mention or reference the user's archetype, data, or give direct hints about their specific details."
+"Your objective is to ensure the social media content deeply resonates with their audience while maintaining discretion about its origins."
+"You will be provided additional details which you must adhere to strictly."
+"For example, if a one-liner is requested, it should be a single, concise sentence without hashtags or direct references to the user's information."
+
+
+            )
         }
 
-        # Send the personalized prompt to the GPT-3 API.
+        # Generate hook
         res = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[
@@ -53,13 +55,25 @@ def Ajax(request):
             ],
             temperature=0.7
         )
-
         response = res.choices[0].message["content"]
-        print(response)
 
-        # Save the chat in the database.
-        chat = Chat.objects.create(text=personalized_prompt, gpt=response)
-        return JsonResponse({'data': response})
+        # Generate social media post
+        post_prompt2 = f"Based on this information about the user: {personalized_prompt2}, craft a compelling social media post."
+        post_res = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                context,
+                {"role": "user", "content": f"{post_prompt2}"}
+            ],
+            temperature=0.7
+        )
+        post_response = post_res.choices[0].message["content"]
+
+        # Save both hook and post to the database
+        chat = Chat.objects.create(text=personalized_prompt, gpt=response, post=post_response)
+
+        return JsonResponse({'data': response, 'post_data': post_response})
 
     return JsonResponse({})
 
+# Add any other views or functions below

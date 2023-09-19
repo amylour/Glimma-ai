@@ -4,7 +4,6 @@ html, body {
 
 body {
     display: flex;
-
     align-items: center; /* Vertically center */
     justify-content: center; /* Horizontally center */
     flex-direction: column; /* Stack children vertically */
@@ -13,6 +12,22 @@ body {
     font-family: Arial, sans-serif;
     position: relative;
     overflow: hidden; /* Ensure that the circles do not cause scrolling */
+}
+
+#chatCard {
+    width: 600px;
+    margin: 50px auto;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: black;
+    outline-color: #9966ff;
+    box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.1); /* Changed shadow color to white with a low opacity for better visibility on the dark background */
+}
+
+#chatCard .card-body {
+    background-color: rgba(0, 0, 0, 0.1); /* Slightly transparent white background for the card body for better distinction */
+    padding: 20px;
+    border-color: #9966ff;
 }
 
 
@@ -50,6 +65,15 @@ button {
     color: white;
     cursor: pointer;
     margin-top: 10px;
+    width: 600px;
+
+}
+
+#userText{
+    width: 600px;
+    background-color: black;
+    color: white;
+    border-color: #9966ff;
 }
 
 
