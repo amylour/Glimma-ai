@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100;0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap');
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    align-items: center; /* Vertically center */
+    justify-content: center; /* Horizontally center */
+    flex-direction: column; /* Stack children vertically */
+    background: linear-gradient(153deg, rgba(2,0,36,1) 21%, rgb(17 5 59) 65%, rgb(0 10 73) 100%);
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    position: relative;
+    overflow: hidden; /* Ensure that the circles do not cause scrolling */
+}
+
+#chatCard {
+    width: 600px;
+    margin: 50px auto;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: black;
+    outline-color: #9966ff;
+    box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.1); /* Changed shadow color to white with a low opacity for better visibility on the dark background */
+}
+
+#chatCard .card-body {
+    background-color: rgba(0, 0, 0, 0.1); /* Slightly transparent white background for the card body for better distinction */
+    padding: 20px;
+    border-color: #9966ff;
+}
+
+.hook-title {
+    text-align: center;
+}
+
+.question-container {
+    text-align: center; /* Center the content within each question container */
+    z-index: 2; /* keep background behind buttons*/
+}
+
+.progress {
+    height: 30px;
+    background-color: #333;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: #9966ff;
+    transition: width 0.3s;
+}
+
+.question-container {
+    display: none;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #8055D7;
+    font-weight: bold;
+    border: none;
+    border-radius: 30px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 18px;
+    color: #f8f5f0;
+    cursor: pointer;
+    margin: 10px 5px 10px 5px;
+    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.25));
+    transition: transform 0.3s ease;
+    transform-origin: center;
+    text-align: center;
+}
+
+button:hover {
+    background-color: #9679cf;
+    transform: scale(1.05);
+}
+
+button:active {
+    background-color: #754dc4;
+    transform: scale(0.95);
+}
+
+#userText{
+    width: 600px;
+    background-color: black;
+    color: white;
+    border-color: #9966ff;
+}
+
+.gradient-circle {
+    position: absolute;
+    top: 50%;
+    width: 100vw; /* Full width */
+    height: 100vw; /* Equal to width to ensure it remains a circle */
+    transform: translateY(-50%); /* Center vertically */
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(153, 102, 255, 0.2), transparent); /* Added 20% opacity */
+    z-index: 1;
+}
+
+.gradient-circle.left {
+    left: 50%;
+    transform: translateX(-100%) translateY(-50%);
+}
+
+.gradient-circle.right {
+    right: 50%;
+    transform: translateX(100%) translateY(-50%);
+}
+
+#userText {
+    width: 600px;
+    border: none;
+    background-color: #fff;
+    border-radius: 20px;
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 16px;
+    font-family: 'DM Sans', sans-serif;
+}
+
+.submit-btn {
+    text-align: center;
+}

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'GLIMMA_AI/css/alt_quiz.css' %}">
+</head>
+<body>
+    <div class="gradient-circle left"></div>
+    <div class="gradient-circle right"></div>
+
+    <h1 class="header-txt">Welcome to <strong>Glimma AI.</strong></h1>
+    <p class="p-txt">Click the button below to get started.</p>
+    <a href="{% url 'display_quiz' %}" class="start-btn">Start Quiz</a>
+
+<footer></footer>
+</body>
+</html>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Quiz</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'GLIMMA_AI/css/quiz.css' %}">
+    <link rel="stylesheet" href="{% static 'GLIMMA_AI/css/alt_quiz.css' %}">
 </head>
 <body>
     <div class="gradient-circle left"></div>
@@ -19,7 +19,7 @@
     {% for question, options in questions.items %}
         <!-- Each question is contained in its own div and initially hidden -->
         <div class="question-container" id="question-{{ forloop.counter0 }}" style="display: none;">
-            <h2>{{ question }}</h2>
+            <h1>{{ question }}</h1>
             {% if options == "input_field" %}
                 <!-- For text input field -->
                 <input type="text" placeholder="Enter your answer here" id="input-{{ forloop.counter0 }}">
