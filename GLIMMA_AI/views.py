@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
 from .models import UserResponse
 from django.contrib.auth.decorators import login_required
 import json
@@ -18,7 +17,7 @@ def display_quiz(request):
 
     return render(request, 'GLIMMA_AI/quiz.html', {'questions': questions})
 
-@csrf_exempt
+
 @login_required
 def save_answer(request):
     try:

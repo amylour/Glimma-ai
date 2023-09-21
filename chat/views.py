@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from .models import *
 from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
 import openai
 from django.conf import settings
 from GLIMMA_AI.models import UserResponse
@@ -26,7 +25,7 @@ def chat(request):
     chats = Chat.objects.all()
     return render(request, 'GLIMMA_AI/chat.html', {'chats': chats, })
 
-@csrf_exempt
+
 def Ajax(request):
     if request.method == "GET" or request.headers.get('X-Requested-With') == 'XMLHttpRequest':
         personalized_prompt = generate_prompt(request.user)

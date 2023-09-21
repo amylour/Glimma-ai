@@ -11,38 +11,29 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
 from pathlib import Path
-from decouple import Config, Csv
+if os.path.exists("env.py"):
+    import env
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-# Load the .env file
-os.environ.setdefault("DJANGO_READ_DOT_ENV_FILE", "True")
-
-if os.getenv("DJANGO_READ_DOT_ENV_FILE") == "True":
-    with open(os.path.join(BASE_DIR, ".env")) as f:
-        for line in f:
-            key, value = line.strip().split('=', 1)
-            os.environ[key] = value.strip()
-
-config = Config(os.environ)
-
-
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-(3_fkju!(gawcgi#!@l668awk@^o6o^i8xzf-*kz=0l!!p*cxj'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['8000-romcgill-glimmaai-bxu498rzy8l.ws-us104.gitpod.io']
+ALLOWED_HOSTS = ['8000-amylour-glimmaai-q4agaxfpyfu.ws-eu104.gitpod.io']
 
-OPENAI_API_KEY = config('OPENAI_API_KEY', default='')
+
+OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
 # Application definition
@@ -53,7 +44,11 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sites',
     'django.contrib.staticfiles',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     'GLIMMA_AI',
     'chat',
 ]
@@ -66,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'GLIMMA.urls'
@@ -85,6 +81,16 @@ TEMPLATES = [
         },
     },
 ]
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+SITE_ID = 1
 
 WSGI_APPLICATION = 'GLIMMA.wsgi.application'
 
