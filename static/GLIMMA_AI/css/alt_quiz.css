@@ -115,3 +115,13 @@ input {
     font-family: 'DM Sans', sans-serif;
     margin-right: 10px;
 }
+
+.welcome-section {
+    text-align: center;
+    margin: 0 auto;
+    z-index: 1;
+}
+
+.welcome-txt {
+    padding: 0px 0px 20px;
+}

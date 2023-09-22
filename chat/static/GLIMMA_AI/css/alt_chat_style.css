@@ -59,7 +59,7 @@ body {
 
 button {
     padding: 10px 20px;
-    background-color: #8055D7;
+    background: linear-gradient(to bottom, #9679cf, #7a4bd8);
     font-weight: bold;
     border: none;
     border-radius: 30px;
@@ -84,11 +84,13 @@ button:active {
     transform: scale(0.95);
 }
 
-#userText{
+#userText {
     width: 600px;
     background-color: black;
-    color: white;
+    color: #000;
     border-color: #9966ff;
+    padding-top: 25px;
+    border-radius: 25px;
 }
 
 .gradient-circle {
